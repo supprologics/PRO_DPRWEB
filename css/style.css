@@ -1,0 +1,101 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 23, 2020, 5:09:30 PM
+    Author     : HD
+*/
+header{
+    padding: 20px 10px;
+ border-top: 5px solid #1681c4;
+}
+header .main_text{
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0px;
+}
+
+header .main_contact{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.nav_bar{
+    background: #1681c4;
+}
+
+/** NAVIBAR **/
+.bg-light{
+    background: #1681c4 !important;
+}
+
+
+.text_box h2{
+    text-transform: uppercase;
+    font-size: 42px;
+    font-weight: bold;
+    padding: 15px;
+    line-height: 35px;
+    color: white;
+    text-shadow: 1px 1px rgba(0,0,0,0.8);
+}
+
+
+/** FOOTER **/
+.footer_box{
+    background: #e2e2e2;
+}
+footer .footer_header_text{
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 12px;
+    color: #1681c4;
+    font-weight: bold;
+}
+
+.footer_menu{
+    list-style: none;
+    margin: 0px;
+    padding:0;
+    padding-top: 15px;
+}
+
+.footer_menu li a{
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #616161;
+    text-decoration: none;
+}
+.copyright{
+    padding: 15px 0;
+    font-size: 12px;
+    color: #c2c2c2;
+}
+
+.footer_box_line{
+    border-top: 1px solid #e8e8e8;
+    margin-top: 15px;
+}
+
+
+#trading{
+    height: 60vh;
+    background: url('../images/trading_1.jpg');
+    background-size: cover;
+}
+#investment{
+    height: 60vh;
+    background: url('../images/investment_1.jpg') right center;
+    background-size: cover;
+}
+#realestate{
+    height: 60vh;
+    background: url('../images/realestate_1.jpg')right center;
+    background-size: cover;
+}
+
+#ayubowan{
+    height: 20px;
+}
