@@ -22,7 +22,7 @@ class PostController extends Controller
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','jsondata','delete','index','view'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -48,11 +48,27 @@ class PostController extends Controller
 	
 	public function actionCreate()
 	{
+
 		try {           
             
                     $model = new Post;
 
+                    if($_FILES['image']['size']>0){
+                        $uploadedFile=CUploadedFile::getInstanceByName("image");
+                        $filename=$_POST['title'];
+                        $model->image=$filename.".".$uploadedFile->getExtensionName();
+                        $uploadedFile->saveAs('./images/post/'.$model->image);
+
+
+                    }
+
                     $model->attributes = $_POST;
+                    $model->title = $_POST['title'];
+                    $model->content = $_POST['content'];
+                    $model->online = $_POST['online'];
+                    $model->created = date("Y-m-d H:i:s");
+
+
                     
 
                     if (!$model->save()) {
@@ -79,7 +95,20 @@ class PostController extends Controller
             
                     $model=$this->loadModel($id);
 
+                    if($_FILES['image']['size']>0){
+                        $uploadedFile=CUploadedFile::getInstanceByName("image");
+                        $filename=$_POST['title'];
+                        $model->image=$filename.".".$uploadedFile->getExtensionName();
+                        $uploadedFile->saveAs('./images/post/'.$model->image);
+
+
+                    }
+
                     $model->attributes = $_POST;
+                    $model->title = $_POST['title'];
+                    $model->content = $_POST['content'];
+                    $model->online = $_POST['online'];
+                    $model->created = date("Y-m-d H:i:s");
 
                     if (!$model->save()) {
                     
@@ -125,7 +154,7 @@ class PostController extends Controller
                 if (empty($_GET['val'])) {
                     $searchtxt = "";
                 } else {
-                    $searchtxt = " AND name LIKE '%" . $_GET['val'] . "%' ";
+                    $searchtxt = " WHERE name LIKE '%" . $_GET['val'] . "%' ";
                 }
                 
                 if (empty($_GET['pages'])) {
@@ -135,7 +164,7 @@ class PostController extends Controller
                 }
                 
                 
-                $sql = "SELECT * FROM post WHERE online = 1 $searchtxt ORDER BY id DESC ";                
+                $sql = "SELECT * FROM post $searchtxt ORDER BY id DESC ";                
                 $count = Yii::app()->db->createCommand($sql)->query()->rowCount;
                 $dataProvider = new CSqlDataProvider($sql, array(
                     'totalItemCount' => $count,

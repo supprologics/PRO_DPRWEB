@@ -5,7 +5,6 @@
 ?>
 
 
-
 <!--- Script -->
 <script>
 
@@ -31,10 +30,7 @@
             success: showResponse,
             error: showResponse,
             complete: function () {
-                $("#Post-form").resetForm();
                 search();
-                $("#Post-addmodel").modal('hide');
-
             }
         });
 
@@ -44,7 +40,6 @@
                 $("#myModalLabel").html("Add a New Post");
                 $("#Post-form").resetForm();
                 $("#Post-form").attr("action", "<?php echo Yii::app()->createUrl('Post/create') ?>/");
-       
             }else{
                 $("#myModalLabel").html("Update Post");
             }
@@ -118,9 +113,11 @@
             data: {
                 val: $("#Post-search").val(),
                 pages: $("#Post-pages").val()
+            },
+            complete: function () {
+                int();
             }
         });
-        $('[data-toggle="tooltip"]').tooltip();
     }
 
 
@@ -147,18 +144,31 @@
             <div class="modal-body">
 
                 <div class="cus-form">
-                    <form class="form-horizontal" action="<?php echo Yii::app()->createUrl('Post/create') ?>" method="post" id="Post-form">
+                    <form class="form-horizontal" action="<?php echo Yii::app()->createUrl('Post/create') ?>" method="post" id="Post-form" enctype="multipart/form-data">
 
                         <div class="form-group">
-                            <label for="title" class="col-sm-2 control-label">Post Title</label>
+                            <label for="title" class="col-sm-2 control-label">Title</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="title" name="title" placeholder="Title">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="description" class="col-sm-2 control-label">Description</label>
+                            <label for="content" class="col-sm-2 control-label">Content</label>
                             <div class="col-sm-10">
-                                <textarea name="description" id="description" rows="2" class="form-control"></textarea>
+                                <textarea name="content" id="content" rows="2" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="image" class="col-sm-2 control-label">Image</label>
+                            <div class="col-sm-4">
+                                <input type="file" class="form-control" id="image" name="image" placeholder="cover">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="online" class="col-sm-2 control-label">Online</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="online" name="online" placeholder="Online">
                             </div>
                         </div>
                     </form>
@@ -193,43 +203,40 @@
                 <option>100 Pages</option>
             </select>
         </div>
+        <div class="col-sm-1  ">
+            <a type="button"  class="  btn btn-light btn-block " href="<?php echo Yii::app()->createUrl("site/logout") ?>">Logout</a>
+        </div>
     </div>
 </div>
 
 
 
 
-<div class="table-box">
-
-    <div class="row">
-        <div class="col-sm-11 headerdiv">Your Column Name</div>
-        <div class="col-sm-1 headerdiv">&nbsp;</div>
-    </div>
 
 
-    <?php $this->widget('zii.widgets.CListView', array(
-    'dataProvider'=>$dataProvider,
-    'itemView'=>'_view',
-    'enablePagination' => true,
-    'summaryText' => '{page}/{pages} pages',
-    'id' => 'Post-list',
-    'emptyTagName' => 'p',
-    'emptyText' => '<span class="glyphicon glyphicon-file"></span> No Records  ',
-    'itemsTagName' => 'div',
-    'itemsCssClass' => 'container-fluid',
-    'pagerCssClass' => 'pagination-div',
-    'pager' => array(
-    "header" => "",
-    "htmlOptions" => array(
-    "class" => "pagination pagination-sm"
-    ),
-    'selectedPageCssClass' => 'active',
-    'nextPageLabel' => 'Next',
-    'lastPageLabel' => 'Last',
-    'prevPageLabel' => 'Previous',
-    'firstPageLabel' => 'First',
-    'maxButtonCount' => 10
-    ),
-    )); ?>
 
-</div>
+        <div class="row no-gutters">
+            <?php $this->widget('zii.widgets.CListView', array(
+            'dataProvider'=>$dataProvider,
+            'itemView'=>'_view',
+            'enablePagination' => true,
+            'summaryText' => '{page}/{pages} pages',
+            'id' => 'Post-list',
+            'emptyTagName' => 'p',
+            'emptyText' => '<span class="glyphicon glyphicon-file"></span> No Records  ',
+            'itemsTagName' => 'div',
+            'itemsCssClass' => 'ss',
+            'pagerCssClass' => 'pagination-div',
+            'pager' => array(
+            "header" => "",
+            "htmlOptions" => array(
+            "class" => "pagination pagination-sm"
+            ),
+            'selectedPageCssClass' => 'active',
+            'nextPageLabel' => 'Next',
+            'lastPageLabel' => 'Last',
+            'prevPageLabel' => 'Previous',
+            'firstPageLabel' => 'First',
+            'maxButtonCount' => 10
+            ),
+            )); ?>

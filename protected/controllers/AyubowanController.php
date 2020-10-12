@@ -4,8 +4,24 @@ class AyubowanController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+		$sql = "SELECT * FROM post ORDER BY id DESC ";
+		$count = Yii::app()->db->createCommand($sql)->query()->rowCount;
+		$dataProvider = new CSqlDataProvider($sql, array(
+			'totalItemCount' => $count,
+			'pagination' => array(
+				'pageSize' => '10'
+			),
+				)
+		);
+	
+		$this->render('index', array(
+			'dataProvider' => $dataProvider,
+		));
 	}
+
+
+
+
 
 	// Uncomment the following methods and override them if needed
 	/*
@@ -34,3 +50,8 @@ class AyubowanController extends Controller
 	}
 	*/
 }
+
+
+
+
+

@@ -8,8 +8,6 @@
  * @property string $title
  * @property string $content
  * @property integer $online
- * @property string $created_time
- * @property integer $author_id
  */
 class Post extends CActiveRecord
 {
@@ -30,12 +28,12 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, content', 'required'),
-			array('online, author_id', 'numerical', 'integerOnly'=>true),
+			array('online', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>128),
-			array('created_time', 'safe'),
+			array('image', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, content, online, created_time, author_id', 'safe', 'on'=>'search'),
+			array('id, title, content, created, image, online', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,8 +58,8 @@ class Post extends CActiveRecord
 			'title' => 'Title',
 			'content' => 'Content',
 			'online' => 'Online',
-			'created_time' => 'Created Time',
-			'author_id' => 'Author',
+			'image' => 'Image',
+			'created' => 'Created_at',
 		);
 	}
 
@@ -87,8 +85,8 @@ class Post extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('online',$this->online);
-		$criteria->compare('created_time',$this->created_time,true);
-		$criteria->compare('author_id',$this->author_id);
+		$criteria->compare('created',$this->created,true);
+		$criteria->compare('image',$this->image,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

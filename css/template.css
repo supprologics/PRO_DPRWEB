@@ -24,3 +24,15 @@
     margin-right: 5px;
     margin-bottom: 5px;
 }
+.table-box .headerdiv{
+    padding: 4px;
+    background: #6b6b6b;
+    color: white;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+.cells{
+    padding: 4px 4px;
+    font-size: 12px;
+}

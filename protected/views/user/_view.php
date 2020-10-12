@@ -12,9 +12,6 @@
 <div class='col-sm-2 cells'>
 	<?php echo $data['password']; ?>
 </div>
-<div class='col-sm-2 cells'>
-	<?php echo $data['email']; ?>
-</div>
     
     <div class='col-sm-1 cells btn-cog text-right'>
         <a class="User-update" href="#" data-id="<?php echo $data['id']; ?>" model="User" controler="UserController" data-toggle="tooltip" data-placement="top" title="Update"><span class="glyphicon glyphicon-cog"></span></a>
