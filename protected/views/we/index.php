@@ -65,18 +65,26 @@
 </div>
 
 <div class="row">
-    <div class="col">
+    <div class="col-md-6">
         <div style="padding: 15px;">
-            <h3>Bharatha Subasinghe</h3>
+
+            <img class="card-img-top text-center  z-depth-2 " src='<?php echo Yii::app()->request->baseUrl; ?>/images/we2.jpg'
+                alt="Card image cap" style="height:250px; width:250px">
+
+            <h3 class="pt-2">Bharatha Subasinghe</h3>
             <h5>Director </h5>            
             <p style="font-size: 12px;">
                 Bharatha Subasinghe is a Director of D.P.R. Global Business Networks (Private) Limited and the Managing Director of D.P.R. Consultants (Private) Limited, D. P. R. Corporate Services (Private) Limited. He is Chartered Corporate Secretary (The Institute of Chartered Corporate Secretaries), Chartered Tax Advisor and Accountant (C A Sri Lanka) and Fellow member of Sri Lanka Institute of Taxation. He is also, a Commercial Arbitrator and Diploma holder in Intellectual Property Law (IP) in Sri Lanka (Institute for the Development of Commercial Law & Practice (ICLP). He served as a Council member of the Sri Lanka Institute of Taxation over a period of five years and member of Association of Accounting Technicians of Sri Lanka (AAT). He is an advisor of foreign investments in Sri Lanka with over twenty five years’ experience in Accounting, Auditing, Taxation and Company Law in Sri Lanka. Bharatha has employed a period of five years at Ms. KPMG (Chartered Accountants) Sri Lanka) and Maldives. Currently, he is reading for Master of Business Administration in Taxation which is first MBA in Taxation in Sri Lanka for public sector, at the Postgraduate Institute of Management (PIM), University of Sri Jayewardanepura, Sri Lanka. Bharatha is also a member of Business Network International (BNI), Aspire Chapter, Colombo, Sri Lanka.
             </p>
         </div>
     </div>
-    <div class="col">
+    <div class="col-md-6">
         <div style="padding: 15px;">
-            <h3>Suranjith Swaris</h3>
+
+            <img class="card-img-top text-center  z-depth-2 " src='<?php echo Yii::app()->request->baseUrl; ?>/images/we1.jpg'
+                    alt="Card image cap" style="height:250px; width:250px">
+
+            <h3 class="pt-2">Suranjith Swaris</h3>
             <h5>Director </h5>            
             <p style="font-size: 12px;">
                 Suranjith is a Certified Professional Marketer & Practicing marketer, having completed professional qualifications as such Master of Business Administration from Buckinghamshire New University (UK), Post Graduate Diploma in Project Management from Cardiff Metropolitan University (UK) , Post Graduate Diploma in Marketing (Sri Lanka), Certificate in Brand Management and Diploma in Business Management and a Certified Management Accountant (CMA-Australia).

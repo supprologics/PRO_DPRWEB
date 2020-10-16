@@ -4,7 +4,7 @@ class PostController extends Controller
 {
 	
 	
-
+    public $layout='//layouts/postadmin';
 	/**
 	 * @return array action filters
 	 */
@@ -30,12 +30,24 @@ class PostController extends Controller
 		);
 	}
         
+    public function returnMsg($msg, $status, $hide = 0, $id = "") {
+        $result = array(
+            'msg' => $msg,
+            'sts' => $status,
+            'hide' => $hide,
+            'id' => $id,
+        );
+        echo json_encode($result);
+        die();
+    }
         
-        public function actionjsondata($id) {
-                $data = Post::model()->findByPk($id);
-                $output = CJSON::encode($data);
-                echo $output;
-        }
+    public function actionjsondata($id) {
+            $data = Post::model()->findByPk($id);
+            $dataArray=$data->attributes;
+            $dataArray['image']="";
+            $output = CJSON::encode($dataArray);
+            echo $output;
+    }
 
 	
 	public function actionView($id)
@@ -82,10 +94,10 @@ class PostController extends Controller
                         throw new Exception($err_txt);
                     }
 
-                    echo "Successfully Created";
+                    $this->returnMsg("Successfully Updated", 1, 0, $model->id);
                 } catch (Exception $exc) {
-                    echo $exc->getMessage();
-                } 
+                    $this->returnMsg($exc->getMessage(), 0, 1);
+                }
 	}
 
 	
@@ -95,20 +107,18 @@ class PostController extends Controller
             
                     $model=$this->loadModel($id);
 
-                    if($_FILES['image']['size']>0){
-                        $uploadedFile=CUploadedFile::getInstanceByName("image");
-                        $filename=$_POST['title'];
-                        $model->image=$filename.".".$uploadedFile->getExtensionName();
-                        $uploadedFile->saveAs('./images/post/'.$model->image);
-
-
+                    if(isset($_FILES['image'])){
+                        if($_FILES['image']['size']>0){
+                            $uploadedFile=CUploadedFile::getInstanceByName("image");
+                            $filename=$_POST['title'];
+                            $model->image=$filename.".".$uploadedFile->getExtensionName();
+                            $uploadedFile->saveAs('./images/post/'.$model->image);
+                        }
                     }
 
-                    $model->attributes = $_POST;
                     $model->title = $_POST['title'];
                     $model->content = $_POST['content'];
                     $model->online = $_POST['online'];
-                    $model->created = date("Y-m-d H:i:s");
 
                     if (!$model->save()) {
                     
@@ -122,10 +132,10 @@ class PostController extends Controller
                     
                     }
 
-                        echo "Successfully Created";
+                    $this->returnMsg("Successfully Updated", 1, 0);
                 } catch (Exception $exc) {
-                        echo $exc->getMessage();
-                }      
+                    $this->returnMsg($exc->getMessage(),0,1);
+                }     
         
 		
 	}
@@ -134,16 +144,16 @@ class PostController extends Controller
 	public function actionDelete($id)
 	{
 		 try {
-                    if ($this->loadModel($id)->delete()) {
-                        echo "Successfully Deleted";
-                    } else {
-                        echo "Error Occurred";
-                    }
-                } catch (CDbException $exc) {
-                    echo "You can't Delete This Record, Database Reject the request, this record related with different records";
-                } catch (Exception $exc) {
-                     echo "Invalid Operation";
-                }
+            if ($this->loadModel($id)->delete()) {
+                $this->returnMsg("Successfully Deleted",1,0);
+            } else {
+                $this->returnMsg($exc->getMessage(),0,1);
+            }
+        } catch (CDbException $exc) {
+            $this->returnMsg($exc->getMessage(),0,1);
+        } catch (Exception $exc) {
+            $this->returnMsg($exc->getMessage(),0,1);
+        }
 	}
 
 	
@@ -154,7 +164,7 @@ class PostController extends Controller
                 if (empty($_GET['val'])) {
                     $searchtxt = "";
                 } else {
-                    $searchtxt = " WHERE name LIKE '%" . $_GET['val'] . "%' ";
+                    $searchtxt = " WHERE title LIKE '%" . $_GET['val'] . "%' ";
                 }
                 
                 if (empty($_GET['pages'])) {

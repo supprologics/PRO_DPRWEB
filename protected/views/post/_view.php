@@ -54,7 +54,6 @@
         </div>
         <!-- Grid row -->
 
-        <hr class="mb-5">
     
 
 
@@ -67,3 +66,4 @@
     </div>
 
 </div>
+<hr class="mb-5" style="border: 1px solid #1681c4;">

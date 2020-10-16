@@ -15,7 +15,7 @@
 
                 return $("#Post-form").validate({
                     rules: {
-                        name: {
+                        title: {
                             required: true,
                         }
                     },
@@ -123,6 +123,11 @@
 
 </script>
 <!-- //END SCRIPT -->
+<style>
+    .btnblue{
+        background-color: #1681c4; color:white
+    }
+</style>
 
 <div id="header-sec">
     <div class="row">
@@ -137,9 +142,9 @@
 <div class="modal fade" id="Post-addmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-header btnblue">
                 <h4 class="modal-title" id="myModalLabel">Add a New Posts</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
 
@@ -148,7 +153,7 @@
 
                         <div class="form-group">
                             <label for="title" class="col-sm-2 control-label">Title</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-10">
                                 <input type="text" class="form-control" id="title" name="title" placeholder="Title">
                             </div>
                         </div>
@@ -160,15 +165,18 @@
                         </div>
                         <div class="form-group">
                             <label for="image" class="col-sm-2 control-label">Image</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-10">
                                 <input type="file" class="form-control" id="image" name="image" placeholder="cover">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="online" class="col-sm-2 control-label">Online</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="online" name="online" placeholder="Online">
+                            <label for="online" class="col-sm-2 control-label">Visibilty</label>
+                            <div class="col-sm-10">
+                                <select id="online" name="online" class="form-control">
+                                    <option value="1">Visible</option>
+                                    <option value="0">Hidden</option>
+                                </select>
                             </div>
                         </div>
                     </form>
@@ -176,8 +184,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id="btn-submit" type="button" class="btn btn-default">Save</button>
+                <button type="button" class="btnblue btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btn-submit" type="button" class="btnblue btn btn-default">Save</button>
             </div>
         </div>
     </div>
@@ -186,25 +194,25 @@
 
 <div id="title-nav">
     <div class="row">
-        <div class="col-sm-1">
-            <button id="Post-add" data-toggle="modal" data-target="#Post-addmodel" class="btn btn-default btn-block" id="mainsearch"><span class="glyphicon glyphicon-plus"></span> Add</span></button>
+        <div class="col-sm-2">
+            <button id="Post-add" data-toggle="modal" data-target="#Post-addmodel" class="btn btn-default btn-block btnblue" id="mainsearch"><span class="glyphicon glyphicon-plus"></span> Add</span></button>
 
         </div>
-        <div class="col-sm-3">
-            <input  id="Post-search" type="text" name="search" id="search" class="form-control" placeholder="Search By code/name etc."/>
+        <div class="col-sm-5">
+            <input  id="Post-search" type="text" name="search" id="search" class="form-control" placeholder="Search By title"/>
         </div>
         <div class="col-sm-1">
-            <button id="Post-searchbtn" class="btn btn-default" >Search <span class="glyphicon glyphicon-search"></span></button>
+            <button id="Post-searchbtn" class="btn btn-default btnblue" >Search <span class="glyphicon glyphicon-search"></span></button>
         </div>
-        <div class="col-sm-1 col-sm-push-6">
+        <div class="col-sm-2">
             <select id="Post-pages" name="pages" class="form-control">
                 <option>10 Pages</option>
                 <option>50 Pages</option>
                 <option>100 Pages</option>
             </select>
         </div>
-        <div class="col-sm-1  ">
-            <a type="button"  class="  btn btn-light btn-block " href="<?php echo Yii::app()->createUrl("site/logout") ?>">Logout</a>
+        <div class="col-sm-2  ">
+            <a type="button"  class="btnblue  btn btn-default btn-block " href="<?php echo Yii::app()->createUrl("site/logout") ?>">Logout</a>
         </div>
     </div>
 </div>

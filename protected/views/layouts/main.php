@@ -31,40 +31,71 @@
         <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/bootstrap-datepicker.js'); ?>
         <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/pacenew.js'); ?>
 
-        <script type="text/javascript">
+         <script type="text/javascript">
 
-            $ (function () {
-               $ (".datepicker").datepicker ({
+
+
+            $(function () {
+
+               $(".datepicker").datepicker({
                   format: "yyyy-mm-dd",
                   autoclose: true,
                   todayHighlight: true
                });
+
             });
 
-            function showResponse (responseText, statusText, xhr, $form) {
-               $ ("#err").html ("");
+
+
+            $(function () {                
+               loadDatePicker();                
+            });           
+
+            function loadDatePicker(){
+               $(".datepicker").datepicker({
+                  format: "yyyy-mm-dd",
+                  autoclose: true,
+                  todayHighlight: true
+               });                
+               var dateToday = new Date(); 
+               $(".datepicker_min").datepicker({
+                  format: "yyyy-mm-dd",
+                  startDate: '<?php echo date("Y-m-d"); ?>',
+                  autoclose: true,
+                  todayHighlight: true
+               });                
+            }   
+
+            function showError(txt) {
+               alertify.success(txt);
+            }
+
+            function showResponse(responseText, statusText, xhr, $form) {
+               $("#err").html("");
 
                if (responseText.status != null) {
-                  alertify.success (responseText.responseText);
-                  $ (".modal form").resetForm ();
-                  $ (".modal").modal ('hide');
+                  alertify.success(responseText.responseText);
+
+                  if (typeof value !== "undefined") {
+                        $(".modal form").resetForm();
+                        $(".modal").modal('hide');
+                  }
 
                } else {
-
                   if (typeof (responseText) != 'object') {
-                     var responseText = JSON.parse (responseText);
+                        var responseText = JSON.parse(responseText);
                   }
-
-                  if (responseText.sts == '1' && responseText.hide == '0' || !responseText.hide) {
-                     $ (".modal form").resetForm ();
-                     $ (".modal").modal ('hide');
+                  if (responseText.sts == '1' && responseText.hide == '0' && typeof value !== "undefined" || !responseText.hide) {
+                        $(".modal form").resetForm();
+                        $(".modal").modal('hide');
                   }
-                  alertify.success (responseText.msg);
+                  alertify.success(responseText.msg);
                }
             }
 
 
-        </script>
+
+         </script>
 
 
     </head>
