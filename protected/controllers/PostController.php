@@ -62,6 +62,18 @@ class PostController extends Controller
 	{
 
 		try {           
+
+            if(empty($_POST['title'])){
+                throw new Exception("Title field required.");
+            }
+            
+            if(empty($_POST['content'])){
+                throw new Exception("Content field required.");
+            }
+            if(empty($_FILES['image'])){
+                throw new Exception("Image field required.");
+            }
+
             
                     $model = new Post;
 
@@ -104,7 +116,9 @@ class PostController extends Controller
 	public function actionUpdate($id)
 	{
             try {           
-            
+                if(empty($_POST['title']) || empty($_POST['content'])){
+                    throw new Exception("All fields are required.");
+                }
                     $model=$this->loadModel($id);
 
                     if(isset($_FILES['image'])){
@@ -144,7 +158,12 @@ class PostController extends Controller
 	public function actionDelete($id)
 	{
 		 try {
-            if ($this->loadModel($id)->delete()) {
+            $model = $this->loadModel($id);
+            if (!empty($model->image) && file_exists("./images/post/" . $model->image)) {
+                unlink("./images/post/" . $model->image);
+            }
+
+            if ($model->delete()) {
                 $this->returnMsg("Successfully Deleted",1,0);
             } else {
                 $this->returnMsg($exc->getMessage(),0,1);

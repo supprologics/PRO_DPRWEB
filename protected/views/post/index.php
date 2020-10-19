@@ -15,9 +15,9 @@
 
                 return $("#Post-form").validate({
                     rules: {
-                        title: {
-                            required: true,
-                        }
+                        title: { required: true,},
+                        content: { required: true,},
+                        image: { required: true,},
                     },
                     messages: {
                         name: {
